@@ -10,7 +10,7 @@ If this has been of use, please consider funding my caffeine habit:
 
 # Goals
 
-* Create sensor items for Ethermine items:
+* Create sensor items for Flexpool API items:
   * Current statistics
   
       ✔ Unpaid balance
@@ -60,8 +60,8 @@ Copy the files in the /custom_components/flexpoolinfo/ folder to: [homeassistant
 To use FlexpoolInfo, please add the following items to your HomeAssistant ```configuration.yaml```
 ````
 sensor:
-  - platform: ethermineinfo
-    miner_address: (required) the address of your Ethermine miner
+  - platform: flexpoolinfo
+    miner_address: (required) the address of your Flexpool miner
     currency_name: (required) the currency you would like your unpaid balance to be converted to (not currently implemented)
     token: (required) the token you are mining (eth or xch)
     name_override: (optional) name to identify your wallet instead of your miner address.
@@ -84,7 +84,7 @@ sensor:
 
 ```
 sensor:
-  - platform: ethermineinfo
+  - platform: flexpoolinfo
     miner_address: "0x1234567890123456789012345678901234567890"
     currency_name: USD
     name_override: "wallet name"
