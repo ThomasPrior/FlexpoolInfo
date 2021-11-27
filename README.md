@@ -124,7 +124,7 @@ Current hashrate:
 ```{{ states.sensor.FlexpoolInfo_miner_address.attributes['current_hashrate'] }}```
 
 Unpaid amount:
-```{{ states.sensor.FlexpoolInfo_miner_address.attributes['unpaid'] }}```
+```{{ states.sensor.FlexpoolInfo_miner_address.attributes['unpaid_balance'] }}```
 
 ## How does it look?
 ![Untitled](https://user-images.githubusercontent.com/34111848/143680739-d6869fb5-ea10-4f9e-b9e2-fa5b2e300f96.png)
