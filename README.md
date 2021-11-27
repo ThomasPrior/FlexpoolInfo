@@ -100,7 +100,7 @@ sensor:
   - platform: FlexpoolInfo
     miner_address: "0x1234567890123456789012345678901234567890"
     currency_name: USD
-	token: ETH
+    token: ETH
 ```
 
 ```
@@ -108,7 +108,7 @@ sensor:
   - platform: FlexpoolInfo
     miner_address: "xch12345678901234567890123456789012345678901234567890123456789"
     currency_name: USD
-	token: XCH
+    token: XCH
 ```
 
 Multiple addresses can be configured.
@@ -127,8 +127,9 @@ Unpaid amount:
 ```{{ states.sensor.FlexpoolInfo_miner_address.attributes['unpaid'] }}```
 
 ## How does it look?
+![Untitled](https://user-images.githubusercontent.com/34111848/143680739-d6869fb5-ea10-4f9e-b9e2-fa5b2e300f96.png)
 
-![image](https://user-images.githubusercontent.com/34111848/119135501-6aef4c80-ba36-11eb-9006-dc756af23978.png)
+Disclaimer: I do not mine cryptocurrency. This screenshot is from a publicly accessible address on Flexpool.
 
 Some rather pretty graphs are possible with the [mini-graph-card](https://github.com/kalkih/mini-graph-card):
 
