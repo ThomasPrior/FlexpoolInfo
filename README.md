@@ -81,9 +81,10 @@ To use FlexpoolInfo, please add the following items to your HomeAssistant ```con
 sensor:
   - platform: FlexpoolInfo
     miner_address: (required) the address of your Ethermine miner
-    currency_name: (required) the currency you would like your unpaid balance to be converted to 
+    currency_name: (required) the currency you would like your unpaid balance to be converted to
+    token: (required) XCH or ETH
     name_override: (optional) name to identify your wallet instead of your miner address.
-````
+````XCH or ETH
 
 Please note that the Ethermine API accepts the address in two formats:
 
