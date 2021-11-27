@@ -16,6 +16,7 @@ jobs:
         uses: "hacs/action@main"
         with:
           category: "integration"
+  hass:
     validate:
     runs-on: "ubuntu-latest"
     steps:
