@@ -28,7 +28,11 @@ from .const import (
     ATTR_UNPAID_BALANCE,
     ATTR_UNPAID_LOCAL_BALANCE,
     ATTR_LAST_UPDATE,
-    ATTR_SINGLE_COIN_LOCAL_CURRENCY
+    ATTR_SINGLE_COIN_LOCAL_CURRENCY,
+    ATTR_LAST_PAYOUT_VALUE,
+    ATTR_LAST_PAYOUT_FEE,
+    ATTR_LAST_PAYOUT_TIMESTAMP,
+    ATTR_LAST_PAYOUT_HASH
 )
 
 from homeassistant.components.sensor import PLATFORM_SCHEMA
@@ -103,6 +107,10 @@ class FlexpoolInfoSensor(Entity):
         self._unpaid_local_balance = None
         self._unit_of_measurement = "\u200b"
         self._single_coin_in_local_currency = None
+        self._last_payout_value = None
+        self._last_payout_fee = None
+        self._last_payout_timestamp = None
+        self._last_payout_hash = None
 
     @property
     def name(self):
@@ -128,7 +136,11 @@ class FlexpoolInfoSensor(Entity):
                 ATTR_STALE_SHARES: self._stale_shares, ATTR_INVALID_SHARES: self._invalid_shares,
                 ATTR_LAST_UPDATE: self._last_update, ATTR_UNPAID_BALANCE: self._unpaid_balance,
                 ATTR_UNPAID_LOCAL_BALANCE: self._unpaid_local_balance,
-                ATTR_SINGLE_COIN_LOCAL_CURRENCY: self._single_coin_in_local_currency
+                ATTR_SINGLE_COIN_LOCAL_CURRENCY: self._single_coin_in_local_currency,
+                ATTR_LAST_PAYOUT_VALUE: self._last_payout_value,
+                ATTR_LAST_PAYOUT_FEE: self._last_payout_fee,
+                ATTR_LAST_PAYOUT_TIMESTAMP: self._last_payout_timestamp,
+                ATTR_LAST_PAYOUT_HASH: self._last_payout_hash
                 }
 
     def _update(self):
@@ -156,23 +168,57 @@ class FlexpoolInfoSensor(Entity):
                 + self.miner_address
         )
 
+        paymenturl = (
+                FLEXPOOL_API_ENDPOINT
+                + "paymentsStats?coin="
+                + self.token
+                + "&address="
+                + self.miner_address
+        )
+
+        coingeckoxchurl = (
+                COINGECKO_XCH_API_ENDPOINT
+                + self.local_currency
+        )
+
+        coingeckoethurl = (
+                COINGECKO_ETH_API_ENDPOINT
+                + self.local_currency
+        )
+
         # sending get request to Flexpool dashboard endpoint
         r = requests.get(url=statsurl)
         # extracting response json
         self.data = r.json()
         statsurldata = self.data
 
-        # sending get request to Flexpool payout endpoint
+        # sending get request to Flexpool balance endpoint
         r2 = requests.get(url=balanceurl)
         # extracting response json
         self.data2 = r2.json()
         balanceurldata = self.data2
 
-        # sending get request to Flexpool currentstats endpoint
+        # sending get request to Flexpool currentStats endpoint
         r3 = requests.get(url=workerurl)
         # extracting response json
         self.data3 = r3.json()
         workerurldata = self.data3
+
+        # sending get request to Flexpool paymentsStats endpoint
+        r4 = requests.get(url=paymenturl)
+        # extracting response json
+        self.data4 = r4.json()
+        paymenturldata = self.data4
+
+        # sending get request to Congecko API endpoint
+        if self.token.lower() == "xch":
+            r5 = requests.get(url=coingeckoxchurl)
+            self.data5 = r5.json()
+            coingeckodata = self.data5
+        if self.token.lower() == "eth":
+            r5 = requests.get(url=coingeckoethurl)
+            self.data5 = r5.json()
+            coingeckodata = self.data5
 
         try:
             if statsurldata:
@@ -189,6 +235,21 @@ class FlexpoolInfoSensor(Entity):
                 self._unpaid_balance = r2.json()['result']['balance']
                 self._workers_online = r3.json()['result']['workersOnline']
                 self._workers_offline = r3.json()['result']['workersOffline']
+                if len(r4.json()['result']['lastPayment']):
+                    self._last_payout_value = r4.json()['result']['lastPayment']['value']
+                    self._last_payout_fee = r4.json()['result']['lastPayment']['fee']
+                    self._last_payout_timestamp = datetime.fromtimestamp(int(r4.json()['result']['lastPayment']['timestamp'])).strftime('%d-%m-%Y %H:%M')
+                    self._last_payout_hash = r4.json()['result']['lastPayment']['hash']
+                if self.token.lower() == "xch":
+                    if len(r5.json()['chia']):
+                        self._single_coin_in_local_currency = r5.json()['chia'][self.local_currency]
+                        calculate_unpaid = self._unpaid_balance / 1000000000000000000 * self._single_coin_in_local_currency
+                        self._unpaid_local_balance = round(calculate_unpaid, 2)
+                if self.token.lower() == "eth":
+                    if len(r5.json()['ethereum']):
+                        self._single_coin_in_local_currency = r5.json()['ethereum'][self.local_currency]
+                        calculate_unpaid = self._unpaid_balance / 1000000000000000000 * self._single_coin_in_local_currency
+                        self._unpaid_local_balance = round(calculate_unpaid, 2)
             else:
                 raise ValueError()
 
