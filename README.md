@@ -129,7 +129,7 @@ Unpaid amount:
 ## How does it look?
 ![Untitled](https://user-images.githubusercontent.com/34111848/143680739-d6869fb5-ea10-4f9e-b9e2-fa5b2e300f96.png)
 
-Disclaimer: I do not mine cryptocurrency. This screenshot is from a publicly accessible address on Flexpool.
+Disclaimer: I do not mine cryptocurrency. This screenshot is from a publicly accessible address on Flexpool. Some information has been redacted in the image above to protect the privacy of the individual.
 
 Some rather pretty graphs are possible with the [mini-graph-card](https://github.com/kalkih/mini-graph-card):
 
