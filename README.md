@@ -84,7 +84,7 @@ sensor:
     currency_name: (required) the currency you would like your unpaid balance to be converted to
     token: (required) XCH or ETH
     name_override: (optional) name to identify your wallet instead of your miner address.
-````XCH or ETH
+````
 
 Please note that the Ethermine API accepts the address in two formats:
 
