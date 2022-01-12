@@ -97,7 +97,7 @@ Examples:
 
 ```
 sensor:
-  - platform: FlexpoolInfo
+  - platform: flexpoolinfo
     miner_address: "0x1234567890123456789012345678901234567890"
     currency_name: USD
     token: ETH
@@ -105,7 +105,7 @@ sensor:
 
 ```
 sensor:
-  - platform: FlexpoolInfo
+  - platform: flexpoolinfo
     miner_address: "xch12345678901234567890123456789012345678901234567890123456789"
     currency_name: USD
     token: XCH
