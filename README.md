@@ -79,7 +79,7 @@ In case you don't:
 To use FlexpoolInfo, please add the following items to your HomeAssistant ```configuration.yaml```
 ````
 sensor:
-  - platform: FlexpoolInfo
+  - platform: flexpoolinfo
     miner_address: (required) the address of your Ethermine miner
     currency_name: (required) the currency you would like your unpaid balance to be converted to
     token: (required) XCH or ETH
@@ -118,13 +118,13 @@ Multiple addresses can be configured.
 You can create a template sensor for any of the attributes returned by FlexpoolInfo. For example:
 
 Stale shares:
-```{{ states.sensor.FlexpoolInfo_miner_address.attributes['stale_shares'] }}```
+```{{ states.sensor.flexpoolinfo_miner_address.attributes['stale_shares'] }}```
 
 Current hashrate:
-```{{ states.sensor.FlexpoolInfo_miner_address.attributes['current_hashrate'] }}```
+```{{ states.sensor.flexpoolinfo_miner_address.attributes['current_hashrate'] }}```
 
 Unpaid amount:
-```{{ states.sensor.FlexpoolInfo_miner_address.attributes['unpaid_balance'] }}```
+```{{ states.sensor.flexpoolinfo_miner_address.attributes['unpaid_balance'] }}```
 
 ## How does it look?
 ![Untitled](https://user-images.githubusercontent.com/34111848/143680739-d6869fb5-ea10-4f9e-b9e2-fa5b2e300f96.png)
