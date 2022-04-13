@@ -129,7 +129,7 @@ class FlexpoolInfoSensor(Entity):
         return self._unit_of_measurement
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         return {ATTR_WORKERS_ONLINE: self._workers_online, ATTR_WORKERS_OFFLINE: self._workers_offline,
                 ATTR_CURRENT_HASHRATE: self._current_hashrate, ATTR_AVERAGE_HASHRATE: self._average_hashrate,
                 ATTR_REPORTED_HASHRATE: self._reported_hashrate, ATTR_VALID_SHARES: self._valid_shares,
