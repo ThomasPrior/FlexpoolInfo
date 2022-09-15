@@ -1,6 +1,6 @@
 # FlexpoolInfo
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
-## A custom component for [HomeAssistant](https://github.com/home-assistant/core) 
+## A custom component for [HomeAssistant](https://github.com/home-assistant/core)
 
 Provides data from [Flexpool.io](https://flexpool.io/) on a specified miner.
 
@@ -12,35 +12,35 @@ If this has been of use, please consider funding my caffeine habit:
 
 * Create sensor items for Flexpool API items:
   * Current statistics
-  
+
       ✔ Unpaid balance
-  
+
       ✔ Reported hash rate
-  
+
       ✔ Average hash rate
-  
+
       ✔ Current hash rate
-  
+
       ✔ Valid shares
-  
+
       ✔ Invalid shares
-  
+
       ✔ Stale shares
-  
+
       ✔ Active workers
-      
+
       ✔ Balance
-      
+
       ✔ Balance in local currency
-     
+
   * Payouts
-  
+
       ✔ Paid on
-  
+
       ✔ Amount
-  
+
       ✔ Transaction hash
-      
+
       ✔ Value in local currency
 
 ## Things you should know about FlexpoolInfo
@@ -82,18 +82,26 @@ sensor:
   - platform: flexpoolinfo
     miner_address: (required) the address of your Ethermine miner
     currency_name: (required) the currency you would like your unpaid balance to be converted to
-    token: (required) XCH or ETH
+    token: (required) XCH, ETC or ETH
     name_override: (optional) name to identify your wallet instead of your miner address.
 ````
 
 Please note that the Ethermine API accepts the address in two formats:
 
-- ETH: 42 characters beginning with 0x
+- ETH/ETC: 42 characters beginning with 0x
 - XCH: 62 characters beggining with xch1
 
 The address must be encapsulated in quotation marks as follows:
 
 Examples:
+
+```
+sensor:
+  - platform: flexpoolinfo
+    miner_address: "0x1234567890123456789012345678901234567890"
+    currency_name: USD
+    token: ETC
+```
 
 ```
 sensor:
