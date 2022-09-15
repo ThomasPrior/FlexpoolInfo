@@ -86,7 +86,7 @@ sensor:
     name_override: (optional) name to identify your wallet instead of your miner address.
 ````
 
-Please note that the Ethermine API accepts the address in two formats:
+Please note that the Ethermine API accepts the address in three formats:
 
 - ETH: 42 characters beginning with 0x
 - XCH: 62 characters beggining with xch1
