@@ -27,6 +27,7 @@ ATTR_LAST_PAYOUT_TIMESTAMP = "last_payout_timestamp"
 ATTR_LAST_PAYOUT_HASH = "last_payout_hash"
 
 FLEXPOOL_API_ENDPOINT = "https://api.flexpool.io/v2/miner/"
+COINGECKO_ETC_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum-classic&vs_currencies="
 COINGECKO_ETH_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies="
 COINGECKO_XCH_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=chia&vs_currencies="
 

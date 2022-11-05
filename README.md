@@ -82,18 +82,26 @@ sensor:
   - platform: flexpoolinfo
     miner_address: (required) the address of your Flexpool miner
     currency_name: (required) the currency you would like your unpaid balance to be converted to
-    token: (required) XCH or ETH
+    token: (required) XCH, ETC or ETH
     name_override: (optional) name to identify your wallet instead of your miner address.
 ````
 
 Please note that the Flexpool API accepts the address in two formats:
 
-- ETH: 42 characters beginning with 0x
-- XCH: 62 characters beginning with xch1
+- ETH/ETC: 42 characters beginning with 0x
+- XCH: 62 characters beggining with xch1
 
 The address must be encapsulated in quotation marks as follows:
 
 Examples:
+
+```
+sensor:
+  - platform: flexpoolinfo
+    miner_address: "0x1234567890123456789012345678901234567890"
+    currency_name: USD
+    token: ETC
+```
 
 ```
 sensor:

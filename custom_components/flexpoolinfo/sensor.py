@@ -15,6 +15,7 @@ from .const import (
     CONF_NAME_OVERRIDE,
     SENSOR_PREFIX,
     FLEXPOOL_API_ENDPOINT,
+    COINGECKO_ETC_API_ENDPOINT,
     COINGECKO_ETH_API_ENDPOINT,
     COINGECKO_XCH_API_ENDPOINT,
     ATTR_WORKERS_ONLINE,
@@ -181,6 +182,11 @@ class FlexpoolInfoSensor(Entity):
                 + self.local_currency
         )
 
+        coingeckoetcurl = (
+                COINGECKO_ETC_API_ENDPOINT
+                + self.local_currency
+        )
+
         coingeckoethurl = (
                 COINGECKO_ETH_API_ENDPOINT
                 + self.local_currency
@@ -215,6 +221,10 @@ class FlexpoolInfoSensor(Entity):
             r5 = requests.get(url=coingeckoxchurl)
             self.data5 = r5.json()
             coingeckodata = self.data5
+        if self.token.lower() == "etc":
+            r5 = requests.get(url=coingeckoetcurl)
+            self.data5 = r5.json()
+            coingeckodata = self.data5
         if self.token.lower() == "eth":
             r5 = requests.get(url=coingeckoethurl)
             self.data5 = r5.json()
@@ -244,6 +254,11 @@ class FlexpoolInfoSensor(Entity):
                 if self.token.lower() == "xch":
                     if len(r5.json()['chia']):
                         self._single_coin_in_local_currency = r5.json()['chia'][self.local_currency]
+                        calculate_unpaid = self._unpaid_balance / 1000000000000000000 * self._single_coin_in_local_currency
+                        self._unpaid_local_balance = round(calculate_unpaid, 2)
+                if self.token.lower() == "etc":
+                    if len(r5.json()['ethereum-classic']):
+                        self._single_coin_in_local_currency = r5.json()['ethereum-classic'][self.local_currency]
                         calculate_unpaid = self._unpaid_balance / 1000000000000000000 * self._single_coin_in_local_currency
                         self._unpaid_local_balance = round(calculate_unpaid, 2)
                 if self.token.lower() == "eth":
