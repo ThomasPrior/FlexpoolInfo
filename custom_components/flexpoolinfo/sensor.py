@@ -18,6 +18,7 @@ from .const import (
     COINGECKO_ETC_API_ENDPOINT,
     COINGECKO_ETH_API_ENDPOINT,
     COINGECKO_XCH_API_ENDPOINT,
+    COINGECKO_ZIL_API_ENDPOINT,
     ATTR_WORKERS_ONLINE,
     ATTR_WORKERS_OFFLINE,
     ATTR_CURRENT_HASHRATE,
@@ -192,6 +193,11 @@ class FlexpoolInfoSensor(Entity):
                 + self.local_currency
         )
 
+        coingeckozilurl = (
+                COINGECKO_ZIL_API_ENDPOINT
+                + self.local_currency
+        )
+
         # sending get request to Flexpool dashboard endpoint
         r = requests.get(url=statsurl)
         # extracting response json
@@ -229,6 +235,10 @@ class FlexpoolInfoSensor(Entity):
             r5 = requests.get(url=coingeckoethurl)
             self.data5 = r5.json()
             coingeckodata = self.data5
+        if self.token.lower() == "zil":
+            r5 = requests.get(url=coingeckozilurl)
+            self.data5 = r5.json()
+            coingeckodata = self.data5
 
         try:
             if statsurldata:
@@ -264,6 +274,11 @@ class FlexpoolInfoSensor(Entity):
                 if self.token.lower() == "eth":
                     if len(r5.json()['ethereum']):
                         self._single_coin_in_local_currency = r5.json()['ethereum'][self.local_currency]
+                        calculate_unpaid = self._unpaid_balance / 1000000000000000000 * self._single_coin_in_local_currency
+                        self._unpaid_local_balance = round(calculate_unpaid, 2)
+                if self.token.lower() == "zil":
+                    if len(r5.json()['zilliqa']):
+                        self._single_coin_in_local_currency = r5.json()['zilliqa'][self.local_currency]
                         calculate_unpaid = self._unpaid_balance / 1000000000000000000 * self._single_coin_in_local_currency
                         self._unpaid_local_balance = round(calculate_unpaid, 2)
             else:

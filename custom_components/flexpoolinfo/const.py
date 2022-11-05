@@ -30,5 +30,6 @@ FLEXPOOL_API_ENDPOINT = "https://api.flexpool.io/v2/miner/"
 COINGECKO_ETC_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum-classic&vs_currencies="
 COINGECKO_ETH_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies="
 COINGECKO_XCH_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=chia&vs_currencies="
+COINGECKO_ZIL_API_ENDPOINT = "https://api.coingecko.com/api/v3/simple/price?ids=zilliqa&vs_currencies="
 
 _LOGGER = logging.getLogger(__name__)
