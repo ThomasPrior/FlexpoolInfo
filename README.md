@@ -44,7 +44,7 @@ If this has been of use, please consider funding my caffeine habit:
       ✔ Value in local currency
 
 ## Things you should know about FlexpoolInfo
-* The Flexpool API is subject to change - there may be occaisions where a code change is required before the component will work again.
+* The Flexpool API is subject to change - there may be occasions where a code change is required before the component will work again.
 * There are limits on how many requests can be made to Flexpool's API and therefore the data retrieved by FlexpoolInfo will be updated periodically and may be out of date by the time you look at it.
 * Please do not use FlexpoolInfo in isolation to make decisions about your cryptocurrency holdings.
 * FlexpoolInfo only reads the statistics of the provided miner.
@@ -72,7 +72,7 @@ In case you don't:
 3. Enter "FlexpoolInfo" into the search box
 4. Press "FlexoolInfo"
 5. Press "Install this repository in HACS"
-6. Don't forget to complete the configuration before restart HomeAssistant!
+6. Don't forget to complete the configuration before restarting HomeAssistant!
 
 ## Configuration
 
@@ -80,13 +80,13 @@ To use FlexpoolInfo, please add the following items to your HomeAssistant ```con
 ````
 sensor:
   - platform: flexpoolinfo
-    miner_address: (required) the address of your Ethermine miner
+    miner_address: (required) the address of your Flexpool miner
     currency_name: (required) the currency you would like your unpaid balance to be converted to
     token: (required) XCH, ETC or ETH
     name_override: (optional) name to identify your wallet instead of your miner address.
 ````
 
-Please note that the Ethermine API accepts the address in two formats:
+Please note that the Flexpool API accepts the address in two formats:
 
 - ETH/ETC: 42 characters beginning with 0x
 - XCH: 62 characters beggining with xch1
