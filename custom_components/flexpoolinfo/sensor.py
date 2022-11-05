@@ -235,11 +235,12 @@ class FlexpoolInfoSensor(Entity):
                 self._unpaid_balance = r2.json()['result']['balance']
                 self._workers_online = r3.json()['result']['workersOnline']
                 self._workers_offline = r3.json()['result']['workersOffline']
-                if len(r4.json()['result']['lastPayment']):
-                    self._last_payout_value = r4.json()['result']['lastPayment']['value']
-                    self._last_payout_fee = r4.json()['result']['lastPayment']['fee']
-                    self._last_payout_timestamp = datetime.fromtimestamp(int(r4.json()['result']['lastPayment']['timestamp'])).strftime('%d-%m-%Y %H:%M')
-                    self._last_payout_hash = r4.json()['result']['lastPayment']['hash']
+                if r4.json()['result']['lastPayment']:
+                    if len(r4.json()['result']['lastPayment']):
+                        self._last_payout_value = r4.json()['result']['lastPayment']['value']
+                        self._last_payout_fee = r4.json()['result']['lastPayment']['fee']
+                        self._last_payout_timestamp = datetime.fromtimestamp(int(r4.json()['result']['lastPayment']['timestamp'])).strftime('%d-%m-%Y %H:%M')
+                        self._last_payout_hash = r4.json()['result']['lastPayment']['hash']
                 if self.token.lower() == "xch":
                     if len(r5.json()['chia']):
                         self._single_coin_in_local_currency = r5.json()['chia'][self.local_currency]
